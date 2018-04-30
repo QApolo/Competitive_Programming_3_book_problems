@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+typedef vector <int> vi;
+class UnionFind {
+private:
+  vi p, rank, setSize;
+  int numSets;
+public:
+  UnionFind(int N) {
+    setSize.assign(N, 1); numSets = N; rank.assign(N, 0);
+    p.assign(N, 0); for (int i = 0; i < N; i++) p[i] = i; }
+  int findSet(int i) { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
+  bool isSameSet(int i, int j) { return findSet(i) == findSet(j); }
+  void unionSet(int i, int j) {
+    if (!isSameSet(i, j)) { numSets--;
+    int x = findSet(i), y = findSet(j);
+    if (rank[x] > rank[y]) 
+    {
+    	p[y] = x; 
+    	setSize[x] += setSize[y];
+    }
+    else 
+    {
+    	p[x] = y;
+    	setSize[y] += setSize[x];
+    if (rank[x] == rank[y]) 
+    	rank[y]++; 
+}
+} }
+  int numDisjointSets() { return numSets; }
+  int sizeOfSet(int i) { return setSize[findSet(i)]; }
+};
+int main()
+{
+	int index = 1;
+	int t;
+	int n;
+	cin >> t;
+
+	map <string, int> association;
+	string name1, name2;
+	while(t--)
+	{
+		cin >> n;
+		UnionFind uf(100000 + 1);
+		for(int i = 0; i < n; i++)
+		{
+			cin >> name1 >> name2;
+			if(association[name1] == 0)
+				association[name1] = index++;
+
+			if(association[name2] == 0)
+				association[name2] = index++;
+			
+			uf.unionSet(association[name1], association[name2]);
+			cout << uf.sizeOfSet(association[name2]) << '\n';
+			
+		}
+	}
+
+	return 0;
+}
