@@ -13,7 +13,7 @@ bool valid(int y, int x)
 	return true;
 }
 
-void bfs(int i, int j)
+void dfs(int i, int j)
 {
 	grid[i][j] = '*';
 	for(int r = 0; r < 8; r++)
@@ -45,7 +45,7 @@ int main()
 				if(grid[i][j] == '@')
 				{
 					cuenta++;
-					bfs(i,j);
+					dfs(i,j);
 				}
 			} 
 		}
