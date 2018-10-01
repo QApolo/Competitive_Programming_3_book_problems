@@ -32,7 +32,7 @@ int main()
 		for(string a: numbers)
 		{
 			string copy = "";
-			for(int j = 0; j < a.length()-1; j++)//for(char r: a)
+			for(int j = 0; j < a.length()-1; j++) //we compare every prefix, excluding the last character to avoid compare string with itself
 			{
 				copy.push_back(a[j]);
 				if(exist.find(copy) != exist.end())
