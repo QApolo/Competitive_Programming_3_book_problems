@@ -11,7 +11,6 @@ int main()
 
 	vector <string> numbers;
 	set <string> exist;
-	map <string, int> mapeo;
 
 	cin >> t;
 	while(t--)
@@ -30,20 +29,15 @@ int main()
 		
 		bool found = false;
 		
-		mapeo.clear();
 		for(string a: numbers)
 		{
 			string copy = "";
-			for(char r: a)
+			for(int j = 0; j < a.length()-1; j++)//for(char r: a)
 			{
-				copy.push_back(r);
+				copy.push_back(a[j]);
 				if(exist.find(copy) != exist.end())
 				{
-					mapeo[copy]++;
-					if(mapeo[copy] > 1){
-						found = true;
-						break;
-					}
+					found = true;
 				}
 			}
 		}
